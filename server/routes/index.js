@@ -9,4 +9,14 @@ router.get('/secret', isLoggedIn, (req, res, next) => {
   })
 })
 
+
+router.get('/home',  (req, res, next) => {
+  console.log("hitting home")
+
+  res.json({
+      body: "helloooo"
+  })
+})
+
+
 module.exports = router
