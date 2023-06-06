@@ -2,19 +2,29 @@ const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const router = express.Router()
 const axios = require('axios')
-const MY_API_KEY = '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'
+const MY_API_KEY = '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'
 
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
   organization: "org-vwhburmVsmqKT8k3eAvtDv6V",
   apiKey: MY_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
-const response = openai.listEngines();
 
-console.log("response")
-console.log("================")
-console.log(response)
+const openai = new OpenAIApi(configuration);
+
+async function createChatCompletion() {
+  const completion = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [
+      { role: "user", content: "Hello world" }
+    ]
+  });
+
+  console.log(completion.data.choices[0].message);
+}
+
+createChatCompletion();
+
 
 // router.get('/secret', isLoggedIn, (req, res, next) => {
 //   res.json({
